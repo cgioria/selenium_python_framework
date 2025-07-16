@@ -1,0 +1,8 @@
+id_propiedad,valor_propiedad,disponible_para_renta,disponible_para_asignacion,tipo_propiedad,porcentaje_copropiedad,deuda_asociada,ingreso_renta_anual,fecha_adquisicion
+DEPTO-SF-001,50000,True,True,Departamento,0.5,0,0,2015-03-10
+DEPTO-RAMOS,60000,False,True,Departamento,0.5,0,0,2020-08-15
+DEPTO-SF-002,50000,True,True,Departamento,0.5,0,0,2015-03-10
+DEPTO-SANTELMO,60000,True,False,Departamento,0.5,0,0,2015-03-10
+TERRENO-LAGUNA,25000,False,True,Terreno,0.5,0,0,2018-11-22
+CASA-MARTINEZ,260000,False,False,Casa,0.5,0,0,2015-03-10
+CASA-PUNTAG,50000,False,False,Casa,0.5,0,0,2019-05-30
