@@ -10,25 +10,6 @@ Framework de automatización web con:
 - **Behave** para enfoque BDD (Behavior-Driven Development)
 - **Page Object Model** para diseño mantenible
 
-## 📦 Estructura del Proyecto
-
-framework/
-├── features/
-│ ├── login.feature # Especificaciones Gherkin
-│ └── steps/
-│ └── login_steps.py # Implementación de pasos
-│
-├── pages/
-│ ├── base_page.py # Clase base con métodos comunes
-│ └── login_page.py # Page Object específico
-│
-├── utilities/
-│ ├── config_manager.py # Manejo de configuraciones
-│ └── webdriver_factory.py # Creación de drivers
-│
-├── reports/ # Reportes HTML/Allure
-└── requirements.txt # Dependencias
-
 
 ## 🔧 Instalación
 
@@ -39,9 +20,8 @@ cd selenium-python-framework
 
 pip install -r requirements.txt
 
+## 🔧 Características
 
-
-### Características destacadas:
 - ✅ Compatible con Selenium 4+
 - ✅ Soporte para BDD con Gherkin
 - ✅ Diseño con Page Object Model
@@ -52,11 +32,7 @@ pip install -r requirements.txt
 Para personalizar el framework, modifique los archivos de configuración en `utilities/config_manager.py`.
 
 
-
-
-
-
-
+## 🔧 Ejecucion
 
 pytest tests/test_selenium.py
 
