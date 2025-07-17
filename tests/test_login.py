@@ -1,42 +1,33 @@
-# test_login.py
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# tests/test_login.py
 import unittest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-import os
-import logging
-logging.basicConfig(level=logging.DEBUG)
+from pages.login_page import LoginPage
+from utilities.driver_manager import DriverManager
 
 class TestLogin(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.driver = webdriver.Chrome()
-        cls.driver.get("https://the-internet.herokuapp.com/login")
-
+        cls.driver = DriverManager.get_chrome_driver()
+        cls.login_page = LoginPage(cls.driver)
+    
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
-
-    # Test 1: Login exitoso
+    
+    def setUp(self):
+        self.login_page.navigate_to_login()
+    
     def test_successful_login(self):
-        self.driver.find_element(By.ID, "username").send_keys("tomsmith")
-        self.driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
-        self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-        self.assertIn("secure", self.driver.current_url)
-
-    # Test 2: Login fallido
+        self.login_page.login("tomsmith", "SuperSecretPassword!")
+        self.assertTrue(self.login_page.is_login_successful())
+        self.assertIn("You logged into a secure area!", self.login_page.get_flash_message())
+    
     def test_failed_login(self):
-        self.driver.get("https://the-internet.herokuapp.com/login")  # Recargar página
-        self.driver.find_element(By.ID, "username").send_keys("sasasasddd")
-        self.driver.find_element(By.ID, "password").send_keys("ghhgjjjjk")
-        self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-        self.assertIn("Your username is invalid!", self.driver.find_element(By.ID, "flash").text)
-
-    # Test 3: Campos vacíos
+        self.login_page.login("wrong_user", "wrong_password")
+        self.assertIn("Your username is invalid!", self.login_page.get_flash_message())
+    
     def test_empty_fields(self):
-        self.driver.get("https://the-internet.herokuapp.com/login")
-        self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-        self.assertIn("Username is required", self.driver.find_element(By.ID, "flash").text)
+        self.login_page.login("", "")
+        self.assertIn("Username is required", self.login_page.get_flash_message())
 
+if __name__ == "__main__":
+    unittest.main()
